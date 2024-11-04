@@ -6,20 +6,16 @@ import org.softgraf.ecommerce.orderserver.customer.CustomerClient;
 import org.softgraf.ecommerce.orderserver.exception.BusinessException;
 import org.softgraf.ecommerce.orderserver.kafka.OrderConfirmation;
 import org.softgraf.ecommerce.orderserver.kafka.OrderProducer;
-import org.softgraf.ecommerce.orderserver.orderline.OrderLine;
 import org.softgraf.ecommerce.orderserver.orderline.OrderLineRequest;
 import org.softgraf.ecommerce.orderserver.orderline.OrderLineService;
+import org.softgraf.ecommerce.orderserver.payment.PaymentClient;
+import org.softgraf.ecommerce.orderserver.payment.PaymentRequest;
 import org.softgraf.ecommerce.orderserver.product.ProductClient;
 import org.softgraf.ecommerce.orderserver.product.PurchaseRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Arrays.asList;
 
 @RequiredArgsConstructor
 @Service
@@ -31,10 +27,11 @@ public class OrderService {
     private final ProductClient productClient;
     private final OrderMapper mapper;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
     public Integer createOrder(OrderRequest request) {
         // check if the customer exists
-        var customerOrder = customerClient.findCustomerById(request.customerId())
+        var customer = customerClient.findCustomerById(request.customerId())
                 .orElseThrow(() -> new BusinessException("Cannot create order :: " +
                         "No customer exist with the provided id: " + request.customerId()));
 
@@ -56,7 +53,14 @@ public class OrderService {
             );
         }
 
-        // todo start the payment process
+        var paymentRequest = new PaymentRequest(
+                request.amount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+        paymentClient.requestOrderPayment(paymentRequest);
 
         // send the order confirmation --> notification ms (kafka)
         orderProducer.sendOrderConfirmation(
@@ -64,7 +68,7 @@ public class OrderService {
                         request.reference(),
                         request.amount(),
                         request.paymentMethod(),
-                        customerOrder,
+                        customer,
                         purchasedProducts
                 )
         );
