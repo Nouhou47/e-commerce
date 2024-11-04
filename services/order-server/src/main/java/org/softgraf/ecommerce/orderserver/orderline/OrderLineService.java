@@ -1,9 +1,10 @@
 package org.softgraf.ecommerce.orderserver.orderline;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.softgraf.ecommerce.orderserver.order.OrderResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +19,12 @@ public class OrderLineService {
         return repository.save(order).getId();
     }
 
+    public List<OrderLineResponse> findAllByOrderId(Integer orderId) {
+        return repository.findAllByOrderId(orderId)
+                .stream()
+                .map(mapper::toOrderLineResponse)
+                .collect(Collectors.toList());
+    }
 }
 
 
