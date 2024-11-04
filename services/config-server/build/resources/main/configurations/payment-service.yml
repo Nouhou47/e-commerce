@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ndach
+    password: root
+    url: jdbc:postgresql://localhost:5432/payment_db
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+server:
+  port: 8060

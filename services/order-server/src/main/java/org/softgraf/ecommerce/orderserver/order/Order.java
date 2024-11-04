@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @Getter
 @EntityListeners(AuditingEntityListener.class)
-@Entity(name = "customer_order")
+@Entity(name = "customer_order_line")
 public class Order {
     @Id
     @GeneratedValue
