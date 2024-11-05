@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Confirmation</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; }
+        .header { background-color: #4CAF50; color: white; padding: 10px; text-align: center; }
+        .content { padding: 20px; }
+        .footer { font-size: 0.9em; color: #666; text-align: center; padding: 10px; }
+        .info { font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Payment Confirmation</h1>
+    </div>
+    <div class="content">
+        <p>Dear <span th:text="${customerName}">Customer Name</span>,</p>
+        <p>We have received your payment successfully.</p>
+
+        <h3>Payment Details</h3>
+        <p><span class="info">Customer Email:</span> <span>customer@example.com</span></p>
+        <p><span class="info">Total Amount:</span> $<span th:text="${amount}">0.00</span></p>
+        <p><span class="info">Order Reference:</span> <span th:text="${orderReference}">ORD123456</span></p>
+
+        <p>Thank you for your purchase. If you have any questions, feel free to contact us.</p>
+        <p>Best regards,<br> The Customer Service Team</p>
+    </div>
+    <div class="footer">
+        <p>This is an automated message. Please do not reply to this email.</p>
+        <p>© 2024, Softgraf - All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>

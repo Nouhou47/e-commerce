@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Confirmation</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; }
+        .header { background-color: #007bff; color: white; padding: 10px; text-align: center; }
+        .content { padding: 20px; }
+        .footer { font-size: 0.9em; color: #666; text-align: center; padding: 10px; }
+        .info { font-weight: bold; }
+        .product-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .product-table th, .product-table td { padding: 8px; border: 1px solid #ddd; text-align: left; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Order Confirmation</h1>
+    </div>
+    <div class="content">
+        <p>Dear <span th:text="${customerName}">Customer Name</span>,</p>
+        <p>Your order has been successfully placed. Here is a summary of your order:</p>
+
+        <h3>Order Details</h3>
+        <p><span class="info">Customer Email:</span> <span>customer@example.com</span></p>
+        <p><span class="info">Order Reference:</span> <span th:text="${orderReference}">Order Reference</span></p>
+        <p><span class="info">Total Amount:</span> $<span th:text="${totalAmount}">0.00</span></p>
+
+        <h3>Products Ordered</h3>
+        <table class="product-table">
+            <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${order.products}">
+                <td th:text="${product.description}">Product Name</td>
+                <td th:text="${product.quantity}">1</td>
+                <td th:text="${product.price}">$0.00</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p>Thank you for your order. We hope you enjoy your purchase!</p>
+        <p>Best regards,<br> The Customer Service Team</p>
+    </div>
+    <div class="footer">
+        <p>This is an automated message. Please do not reply to this email.</p>
+        <p>© 2024, Softgraf - All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>
