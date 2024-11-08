@@ -5,6 +5,10 @@
     <file type="web" url="file://$PROJECT_DIR$/services/config-server" />
     <file type="web" url="file://$PROJECT_DIR$/services/customer-server" />
     <file type="web" url="file://$PROJECT_DIR$/services/discovery-server" />
+    <file type="web" url="file://$PROJECT_DIR$/services/gateway-server" />
+    <file type="web" url="file://$PROJECT_DIR$/services/notification-server" />
+    <file type="web" url="file://$PROJECT_DIR$/services/order-server" />
+    <file type="web" url="file://$PROJECT_DIR$/services/payment-server" />
     <file type="web" url="file://$PROJECT_DIR$/services/product-server" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK">
