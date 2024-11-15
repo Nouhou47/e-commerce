@@ -2,6 +2,8 @@ package org.softgraf.ecommerce.orderserver.order;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.softgraf.ecommerce.orderserver.customer.CustomerClient;
 import org.softgraf.ecommerce.orderserver.exception.BusinessException;
 import org.softgraf.ecommerce.orderserver.kafka.OrderConfirmation;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class OrderService {
 
+    private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
     private final OrderRepository repository;
     private final OrderLineService orderLineService;
     private final CustomerClient  customerClient;
@@ -60,6 +63,7 @@ public class OrderService {
                 order.getReference(),
                 customer
         );
+        logger.info(">> Will perform payment with: {}", paymentRequest);
         paymentClient.requestOrderPayment(paymentRequest);
 
         // send the order confirmation --> notification ms (kafka)

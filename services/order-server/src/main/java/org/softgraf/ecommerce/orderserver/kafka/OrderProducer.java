@@ -19,7 +19,7 @@ public class OrderProducer {
         log.info("Sending order confirmation");
         Message<OrderConfirmation> message = MessageBuilder
                 .withPayload(orderConfirmation)
-                .setHeader(KafkaHeaders.TOPIC, "order-tptic") // Should be the same as the one we set creating the bean in the config
+                .setHeader(KafkaHeaders.TOPIC, "order-topic") // Should be the same as the one we set creating the bean in the config
                 .build();
 
         kafkaTemplate.send(message);

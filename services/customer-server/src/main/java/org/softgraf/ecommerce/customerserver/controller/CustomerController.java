@@ -8,14 +8,23 @@ import org.softgraf.ecommerce.customerserver.model.CustomerResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/customer")
+@RequestMapping("/api/v1/customers")
 @RequiredArgsConstructor
 public class CustomerController {
 
     private final CustomerService service;
+
+    @GetMapping("/hello")
+    public ResponseEntity<String> hello() {
+        return ResponseEntity.ok(
+                String.format("Hello from Customer MS at %s", LocalDateTime.now(ZoneId.of("UCT")))
+        );
+    }
 
     @PostMapping()
     public ResponseEntity<String> createCustomer(

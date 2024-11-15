@@ -1,0 +1,46 @@
+### Greatings from API Gateway
+GET {{host}}/customers/hello
+Accept: application/json
+
+### Create Customer
+POST {{host}}/customers
+Content-Type: application/json
+
+{
+  "firstname": "Nouhou",
+  "lastname": "Ndach",
+  "email": "ndach.nouhou@example.com",
+  "address": {
+    "street": "Rue des Manguiers",
+    "houseNumber": "12B",
+    "zipCode": "23701"
+  }
+}
+
+### Get all customers :: Nouhou
+GET {{host}}/customers/67337b90bdf3d83d3956fa18
+
+### Place an order
+POST {{host}}/orders
+Content-Type: application/json
+
+{
+  "reference":  "O-516-2237-3",
+  "amount":  2237.7,
+  "paymentMethod": "PAYPAL",
+  "customerId": "67337b90bdf3d83d3956fa18",
+  "products": [
+    {
+      "productId": 11,
+      "quantity": 15
+    },
+    {
+      "productId": 3,
+      "quantity": 2
+    },
+    {
+      "productId": 14,
+      "quantity": 6
+    }
+  ]
+}

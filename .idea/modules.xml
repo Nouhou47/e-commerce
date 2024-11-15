@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/customer-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/customer-server.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/e-commerce-app.iml" filepath="$PROJECT_DIR$/.idea/e-commerce-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway-server.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification-server.iml" filepath="$PROJECT_DIR$/.idea/modules/notification-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/product-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/product-server.main.iml" />
     </modules>
   </component>
