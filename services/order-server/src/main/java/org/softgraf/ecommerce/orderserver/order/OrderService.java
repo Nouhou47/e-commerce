@@ -33,6 +33,7 @@ public class OrderService {
     private final PaymentClient paymentClient;
 
     public Integer createOrder(OrderRequest request) {
+        logger.info(" >> Creating order {}", request);
         // check if the customer exists
         var customer = customerClient.findCustomerById(request.customerId())
                 .orElseThrow(() -> new BusinessException("Cannot create order :: " +
@@ -65,6 +66,8 @@ public class OrderService {
         );
         logger.info(">> Will perform payment with: {}", paymentRequest);
         paymentClient.requestOrderPayment(paymentRequest);
+
+        logger.info(" >> Payment succeed :: {}", paymentRequest);
 
         // send the order confirmation --> notification ms (kafka)
         orderProducer.sendOrderConfirmation(
